@@ -6,6 +6,6 @@
     }
   },
   "ConnectionStrings": {
-    "SqlSever": "Server=db;Database=mercury_fire_test;User Id=sa;Password=<replace-me>;"
+    "SqlServer": "Server=db;Database=mercury_fire_test;TrustServerCertificate=True;User Id=sa;Password=<replace-me>;"
   }
 }
