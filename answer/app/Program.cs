@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using BackendExamHub;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,19 @@ app.MapPost(
     )
     .WithName("CreateMyOfficeAcpd")
     .WithOpenApi();
+app.MapDelete(
+        "/my-office-acpd",
+        ([FromServices] AppDbContext db, [FromBody] MyOfficeAcpd acpd) =>
+        {
+            var data = JsonSerializer.Serialize(acpd)!;
+            _ = db.Database.ExecuteSqlRaw(
+                "execute dbo.My_Office_Acpd_Delete @JsonData = {0};",
+                data
+            );
+        }
+    )
+    .WithName("DeleteMyOfficeAcpd")
+    .WithOpenApi();
 
 app.Run();
 
@@ -59,6 +73,7 @@ namespace BackendExamHub
 {
     public class MyOfficeAcpdRequest
     {
+        [JsonPropertyName("ename")]
         public string? EName { get; set; }
     }
 }
