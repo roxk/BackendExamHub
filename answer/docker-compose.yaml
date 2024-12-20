@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: app
+      dockerfile: Dockerfile-dev
+    ports:
+      - 5000:8800
+    volumes:
+      - /app/bin
+      - /app/obj
+      - ./app:/app
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://*:8800"
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-CU16-ubuntu-22.04
