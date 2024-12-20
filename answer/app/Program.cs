@@ -53,6 +53,19 @@ app.MapPost(
     )
     .WithName("CreateMyOfficeAcpd")
     .WithOpenApi();
+app.MapPut(
+        "/my-office-acpd",
+        ([FromServices] AppDbContext db, [FromBody] MyOfficeAcpd acpd) =>
+        {
+            var data = JsonSerializer.Serialize(acpd)!;
+            _ = db.Database.ExecuteSqlRaw(
+                "execute dbo.My_Office_Acpd_Update @JsonData = {0};",
+                data
+            );
+        }
+    )
+    .WithName("UpdateMyOfficeAcpd")
+    .WithOpenApi();
 app.MapDelete(
         "/my-office-acpd",
         ([FromServices] AppDbContext db, [FromBody] MyOfficeAcpd acpd) =>
