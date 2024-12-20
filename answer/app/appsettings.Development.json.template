@@ -6,6 +6,6 @@
     }
   },
   "ConnectionStrings": {
-    "SqlSever": "Server=ServerName;Database=MSSQLTipsDB;User Id=Username;Password=Password;"
+    "SqlSever": "Server=db;Database=mercury_fire_test;User Id=sa;Password=<replace-me>;"
   }
 }
