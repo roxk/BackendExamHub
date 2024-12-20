@@ -1,3 +1,4 @@
+using System.Text.Json;
 using BackendExamHub;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,20 @@ app.MapGet(
             return db.MyOfficeAcpds.AsNoTracking();
         }
     )
-    .WithName("GetMyOfficeApcd")
+    .WithName("GetMyOfficeAcpd")
+    .WithOpenApi();
+
+app.MapPost(
+        "/my-office-acpd",
+        ([FromServices] AppDbContext db, [FromBody] MyOfficeAcpd acpd, ILogger<Program> logger) =>
+        {
+            var data = JsonSerializer.Serialize(acpd);
+            _ = db
+                .MyOfficeAcpds.FromSql($"execute dbo.My_Office_Acpd_Create @JsonData = '{data}'")
+                .AsEnumerable();
+        }
+    )
+    .WithName("CreateMyOfficeAcpd")
     .WithOpenApi();
 
 app.Run();

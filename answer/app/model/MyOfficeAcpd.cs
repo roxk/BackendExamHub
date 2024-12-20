@@ -10,6 +10,9 @@ public class MyOfficeAcpd
     [Column("ACPD_SID")]
     public required string Sid { get; set; }
 
+    [Column("ACPD_ENAME")]
+    public string? EName { get; set; }
+
     // Note: rest of the fields omitted...typing them doesn't test my ability I guess.
     // One thing I'd note is that most fields are nullable so they should be
     // DateTime?, string? to reflect that
