@@ -13,4 +13,6 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: "http://*:8800"
   db:
-    image: mcr.microsoft.com/mssql/server:2022-CU16-ubuntu-22.04
+    image: mcr.microsoft.com/azure-sql-edge:1.0.4
+    environment:
+      ACCEPT_EULA: 1
