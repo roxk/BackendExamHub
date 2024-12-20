@@ -37,15 +37,28 @@ app.MapGet(
 
 app.MapPost(
         "/my-office-acpd",
-        ([FromServices] AppDbContext db, [FromBody] MyOfficeAcpd acpd, ILogger<Program> logger) =>
+        (
+            [FromServices] AppDbContext db,
+            [FromBody] MyOfficeAcpdRequest acpd,
+            ILogger<Program> logger
+        ) =>
         {
-            var data = JsonSerializer.Serialize(acpd);
-            _ = db
-                .MyOfficeAcpds.FromSql($"execute dbo.My_Office_Acpd_Create @JsonData = '{data}'")
-                .AsEnumerable();
+            var data = JsonSerializer.Serialize(acpd)!;
+            _ = db.Database.ExecuteSqlRaw(
+                "execute dbo.My_Office_Acpd_Create @JsonData = {0};",
+                data
+            );
         }
     )
     .WithName("CreateMyOfficeAcpd")
     .WithOpenApi();
 
 app.Run();
+
+namespace BackendExamHub
+{
+    public class MyOfficeAcpdRequest
+    {
+        public string? EName { get; set; }
+    }
+}
