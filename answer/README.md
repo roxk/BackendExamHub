@@ -18,4 +18,6 @@ cd answer
 docker compose up -d
 ```
 6. Restore DB from `mercury_fire_test.bak` via SSMS or `sqlcmd`.
+    - DB can be reached via `localhost:1443`. See `app/appsettings.Development.json` for more details. You might need to click "trust certificate"
+    - The backup file is mounted at `/app/mercury_fire_test.bak` inside the container
 7. Run `http://localhost:5000/swagger` to start.
