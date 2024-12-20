@@ -1,0 +1,11 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "SqlSever": "Server=ServerName;Database=MSSQLTipsDB;User Id=Username;Password=Password;"
+  }
+}

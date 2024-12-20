@@ -14,5 +14,13 @@ services:
       ASPNETCORE_URLS: "http://*:8800"
   db:
     image: mcr.microsoft.com/azure-sql-edge:1.0.4
+    env_file: .env
     environment:
       ACCEPT_EULA: 1
+    ports:
+      - 1433:1433
+    volumes:
+      - db_data:/var/opt/mssql/
+volumes:
+  db_data:
+    driver: local
